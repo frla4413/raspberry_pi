@@ -1,14 +1,12 @@
 ''' code for the temperature sensor is taken from:
 https://www.circuitbasics.com/raspberry-pi-ds18b20-temperature-sensor-tutorial/
 
-This script reads the cpu-temp, reads the temp from the ds18b20-sensor and
-writes it to a file. The result is also printed to the terminal.
+This script reads temp from the ds18b20-sensor.
 '''
 
 import os
 import glob
-from time import sleep, strftime, time
-from gpiozero import CPUTemperature
+from time import sleep
 
 os.system('modprobe w1-gpio')
 os.system('modprobe w1-therm')
@@ -23,7 +21,7 @@ def read_temp_raw():
     f.close()
     return lines
 
-def read_temp():
+def get_temp():
     lines = read_temp_raw()
     while lines[0].strip()[-3:] != 'YES':
         sleep(0.2)
@@ -34,13 +32,7 @@ def read_temp():
         temp_c = float(temp_string) / 1000.0
         return temp_c
 
-cpu = CPUTemperature()
-path = "/home/pi/Documents/temp.csv"
-path = "temp.csv"
-with open(path, "a") as log:
+if __name__ == '__main__':
     while True:
-        temp = read_temp()
-        cpu_temp = cpu.temperature
-        print(temp, " " ,cpu_temp)
-        log.write("{0},{1},{2}\n".format(strftime("%Y-%m-%d %H:%M:%S"),str(temp),str(cpu_temp)))
-        sleep(10)
+        print(get_temp())
+        sleep(5)
