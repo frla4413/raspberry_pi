@@ -14,7 +14,7 @@ def get_temp_humidity():
 
 if __name__ == '__main__':
     filename = 'data.csv'
-    sleep_time = 60*5
+    sleep_time = 60*15
     while True:
         with open(filename, 'a') as log:
             temp, humidity, valid = get_temp_humidity()

@@ -12,4 +12,9 @@ def get_last_reading(filename):
     return last_reading
 
 def get_last_dht11_reading(filename):
-    last_reading = get_last_reading(filename)
+    last_reading = get_last_reading(filename).split(',')
+    time = last_reading[0]
+    temp = last_reading[1]
+    humidity = last_reading[2]
+    return time, humidity, temp
+

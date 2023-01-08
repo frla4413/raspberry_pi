@@ -3,10 +3,12 @@
 The purpose of this project is to learn electronics and API and to combine the two.
 
 **Sensors:**
-  o Temperature sensor DS18B20
-  o Temperature and humidity sensor dht11
+* Temperature sensor DS18B20
+* Temperature and humidity sensor dht11
 
-Remember to set PYTHONPATH=/home/pi/Documents/raspberry_pi/
-This must also be added to /etc/sudoers (since the api-app is executed in sudo-mode)
-see here:
-https://stackoverflow.com/questions/7969540/pythonpath-not-working-for-sudo-on-gnu-linux-works-for-root
+**Remember:** 
+* Add PYTHONPATH=/home/pi/Documents/raspberry_pi/ to .bashrc/.zshrc
+* Must also add PYTHONPATH to /etc/sudoers (since the api-app is executed in sudo-mode)
+  * Add: Defaults        env_keep += 'PYTHONPATH
+  * Remove: env_reset
+  * see here: https://stackoverflow.com/questions/7969540/pythonpath-not-working-for-sudo-on-gnu-linux-works-for-root
