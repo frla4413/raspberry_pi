@@ -2,7 +2,7 @@
 This script reads the cpu-temp.
 '''
 
-from time import sleep, strftime, time
+from time import sleep
 from gpiozero import CPUTemperature
 
 def get_temp():
