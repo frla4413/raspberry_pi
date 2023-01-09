@@ -12,3 +12,10 @@ The purpose of this project is to learn electronics and API and to combine the t
   * Add: Defaults        env_keep += 'PYTHONPATH
   * Remove: env_reset
   * see here: https://stackoverflow.com/questions/7969540/pythonpath-not-working-for-sudo-on-gnu-linux-works-for-root
+
+**TODO:**
+  * Draw termometer figure with pygame
+  * virtualenv
+  * Fritzing for drawing
+  * LED (https://projects.raspberrypi.org/en/projects/people-in-space-indicator/0)
+  * Graphs

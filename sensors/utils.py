@@ -11,6 +11,12 @@ def get_last_reading(filename):
         last_reading = f.readline().decode()
     return last_reading
 
+def get_last_soil_moisture_reading(filename):
+    last_reading = get_last_reading(filename).split(',')
+    time = last_reading[0]
+    moisture = last_reading[1]
+    return time, moisture
+
 def get_last_dht11_reading(filename):
     last_reading = get_last_reading(filename).split(',')
     time = last_reading[0]
