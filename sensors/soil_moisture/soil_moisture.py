@@ -5,10 +5,6 @@ import sys
 import time
 import spidev
 import RPi.GPIO as GPIO
-from pathlib import Path
-from luma.core import cmdline, error
-from PIL import ImageFont
-from luma.core.render import canvas
 from time import sleep, strftime, time
 
 # Pin 15 on Raspberry Pi corresponds to GPIO 22
@@ -88,7 +84,7 @@ if __name__ == '__main__':
             else:
                 moisture1 = round(valmap(sensor1, 5, 3.5, 0, 100), 0)
             with open(filename, 'a') as log:
-                log.write("{0},{1}\n".format(strftime("%H:%M"), str(moisture1)))
+                log.write("{0},{1}\n".format(strftime("%Y-%m-%d %H:%M"), str(moisture1)))
 
 #            sensor2 = round(adc_1, 2)
 #            if sensor2 < 0.5:
