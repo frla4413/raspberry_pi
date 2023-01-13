@@ -1,5 +1,4 @@
 import os
-
 def get_last_reading(filename):
     with open(filename, 'rb') as f:
         try:  # catch OSError in case of a one line file
