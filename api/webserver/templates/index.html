@@ -4,8 +4,9 @@
 {% endblock %}
 
 {% block body %}
-  <button type="button" class="btn btn-primary btn-lg">Large button</button>
-  <p><a href="sensors"> Get Sensor Data </a></p>
-  <p><a href="humidity"> See humidity   </a></p>
-  <p><a href="temp"> See temperature    </a></p>
+<div class="d-grid gap-2 col-6 mx-auto">
+  <a class="btn btn-outline-primary" href="sensors" role="button">Get Sensor Data</a>
+  <a class="btn btn-outline-success" href="humidity" role="button">Humidity</a>
+  <a class="btn btn-outline-danger" href="temp" role="button">Temperature</a>
+</div>
 {% endblock %}

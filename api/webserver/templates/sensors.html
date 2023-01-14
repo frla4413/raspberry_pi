@@ -1,15 +1,36 @@
-<!DOCTYPE html>
-   <head>
-      <title>{{ title }}</title>
-   </head>
-   <body>
-      <h1> Data from {{ name }} </h1>
-      <h2> The date and time is: {{ time }} </h2>
-      <h2> Last temp sensor reading (from {{ temp_sensor_time }}): </h2>
-      <h2> {{ temp_sensor }} C  and humidity is {{ humidity }} % </h2>
-      <h2> Last soil moisture reading (from {{ moisture_sensor_time }}): </h2>
-      <h2> {{ moisture }} % </h2>
-      <h2> The cpu temp is: {{ cpu_temp }} C </h2>
-      <h6><a href="/">Return to index page</a></h6>
-   </body>
-</html>
+{% extends "base.html" %}
+{% block title %}
+  Latest readings
+{% endblock %}
+
+{% block body %}
+
+<p class="text-start"> Sensor readings from {{ name }} 
+</p>
+<div class="list-group">
+  <a href="/temp" class="list-group-item list-group-item-action active" aria-current="true">
+    <div class="d-flex w-100 justify-content-between">
+      <h5 class="mb-1">Temperature</h5>
+      <small>{{ temp_sensor_time }}</small>
+    </div>
+    <p class="mb-1">Latest temperature reading: {{ temp_sensor }} </p>
+    <small class="text-muted">See plot over temperature.</small>
+  </a>
+  <a href="/humidity" class="list-group-item list-group-item-action" aria-current="true">
+    <div class="d-flex w-100 justify-content-between">
+      <h5 class="mb-1">Humidity</h5>
+      <small class="text-muted">{{ temp_sensor_time }} </small>
+    </div>
+    <p class="mb-1">Latest temperature reading: {{ humidity }} </p>
+    <small class="text-muted">See plot over humidity.</small>
+  </a>
+  <a href="#" class="list-group-item list-group-item-action">
+    <div class="d-flex w-100 justify-content-between">
+      <h5 class="mb-1">Soil moisture</h5>
+      <small class="text-muted">{{ moisture_sensor_time }}</small>
+    </div>
+    <p class="mb-1">Latest soil moisture reading: {{ moisture }} </p>
+    <small class="text-muted">See plot over soil moisture.</small>
+  </a>
+</div>
+{% endblock %}

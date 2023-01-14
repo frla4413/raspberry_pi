@@ -20,7 +20,7 @@ def status():
 @app.route("/sensors")
 def sensors():
     template_data = json.loads(data_base.get_last_data())
-    return render_template('sensors2.html', **template_data)
+    return render_template('sensors.html', **template_data)
 
 @app.route("/humidity")
 def make_humidity_plot():
@@ -31,11 +31,11 @@ def make_humidity_plot():
     fig = px.line(df, x="Time", y="Humidity")
     fig.show()
     graphJSON = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
-    header="Humidity at home"
-    description = """
-    Wow! Sure looks humid in here!
-    """
-    return render_template('plot.html', graphJSON=graphJSON, header=header,description=description)
+    template_data = {"title": "Humidity",
+                     "header": "Humidity at home",
+                     "description": "Wow! Sure looks humid in here!",
+                     "graphJSON": graphJSON}
+    return render_template('plot.html', **template_data)
 
 @app.route("/temp")
 def make_temperature_plot():
@@ -46,11 +46,12 @@ def make_temperature_plot():
     fig = px.line(df, x="Time", y="Temp")
     fig.show()
     graphJSON = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
-    header="Temperature at home"
-    description = """
-    Wow! Sure looks hot in here!
-    """
-    return render_template('plot.html', graphJSON=graphJSON, header=header,description=description)
+    template_data = {"title": "Temperature",
+                     "header": "Temperature at home",
+                     "description": "Wow! Sure looks hot in here!",
+                     "graphJSON": graphJSON}
+
+    return render_template('plot.html', **template_data)
 
 @app.route("/base")
 def home():
