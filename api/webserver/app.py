@@ -20,25 +20,25 @@ def status():
 @app.route("/sensors")
 def sensors():
     template_data = json.loads(data_base.get_last_data())
-    return render_template('sensors.html', **template_data)
+    return render_template('sensors2.html', **template_data)
 
 @app.route("/humidity")
-def make__humidity_plot():
+def make_humidity_plot():
 
     data = json.loads(data_base.get_temp_humidity())
     df = pd.DataFrame(data)
 
-    fig = px.line(df, x="Time", y=df.columns[1:3])
+    fig = px.line(df, x="Time", y="Humidity")
     fig.show()
     graphJSON = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
     header="Humidity at home"
     description = """
-    Wow! Sure looks humid enough!
+    Wow! Sure looks humid in here!
     """
     return render_template('plot.html', graphJSON=graphJSON, header=header,description=description)
 
 @app.route("/temp")
-def make__temperature_plot():
+def make_temperature_plot():
 
     data = json.loads(data_base.get_temp_humidity())
     df = pd.DataFrame(data)
@@ -52,6 +52,9 @@ def make__temperature_plot():
     """
     return render_template('plot.html', graphJSON=graphJSON, header=header,description=description)
 
+@app.route("/base")
+def home():
+    return render_template("bootstap2.html")
 
 if __name__ == "__main__":
    app.run(host='0.0.0.0', port=80, debug=True)

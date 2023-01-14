@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}
+  Latest readings
+{% endblock %}
+
+{% block body %}
+
+<p class="text-start"> Sensor readings from {{ name }} 
+</p>
+<div class="list-group">
+  <a href="/temp" class="list-group-item list-group-item-action active" aria-current="true">
+    <div class="d-flex w-100 justify-content-between">
+      <h5 class="mb-1">Temperature</h5>
+      <small>{{ temp_sensor_time }}</small>
+    </div>
+    <p class="mb-1">Latest temperature reading: {{ temp_sensor }} </p>
+    <small class="text-muted">See plot over temperature.</small>
+  </a>
+  <a href="/humidity" class="list-group-item list-group-item-action" aria-current="true">
+    <div class="d-flex w-100 justify-content-between">
+      <h5 class="mb-1">Humidity</h5>
+      <small class="text-muted">{{ temp_sensor_time }} </small>
+    </div>
+    <p class="mb-1">Latest temperature reading: {{ humidity }} </p>
+    <small class="text-muted">See plot over humidity.</small>
+  </a>
+  <a href="#" class="list-group-item list-group-item-action">
+    <div class="d-flex w-100 justify-content-between">
+      <h5 class="mb-1">Soil moisture</h5>
+      <small class="text-muted">{{ moisture_sensor_time }}</small>
+    </div>
+    <p class="mb-1">Latest soil moisture reading: {{ moisture }} </p>
+    <small class="text-muted">See plot over soil moisture.</small>
+  </a>
+</div>
+{% endblock %}
