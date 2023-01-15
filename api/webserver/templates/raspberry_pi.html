@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}
+Raspberry Pi sketcehs
+{% endblock %}
+{% block body %}
+<p class="text-start">  Electrical circuit Raspberry Pi and DHT11.
+                        This digital sensor reads the temperature and humidity.
+                        It has a built-in pull-up resistor. </p>
+    <img src="{{url_for('static', filename='images/dht11_bb.png')}}"
+         class="rounded mx-auto d-block"
+         alt="Electrical circuit DHT11">
+{% endblock %}

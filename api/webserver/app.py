@@ -4,58 +4,38 @@ To run:
     o on another computer/phon connected to the wifi: 192.168.0.13
       (use a browser)
     '''
-from flask import Flask, render_template
+from flask import Flask, render_template, url_for
 import plotly.express as px
 import plotly
 import json
 import pandas as pd
 import sensors.get_data as data_base
+import api.webserver.python_scripts.template_data as template_data2
 
 app = Flask(__name__)
 
 @app.route("/")
-def status():
+def home():
     return render_template('index.html')
 
 @app.route("/sensors")
 def sensors():
-    template_data = json.loads(data_base.get_last_data())
-    return render_template('sensors.html', **template_data)
+    data = template_data2.get_sensor_data()
+    return render_template('sensors.html', **data)
 
 @app.route("/humidity")
 def make_humidity_plot():
-
-    data = json.loads(data_base.get_temp_humidity())
-    df = pd.DataFrame(data)
-
-    fig = px.line(df, x="Time", y="Humidity")
-    fig.show()
-    graphJSON = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
-    template_data = {"title": "Humidity",
-                     "header": "Humidity at home",
-                     "description": "Wow! Sure looks humid in here!",
-                     "graphJSON": graphJSON}
-    return render_template('plot.html', **template_data)
+    data = template_data2.get_humidity_data()
+    return render_template('plot.html', **data)
 
 @app.route("/temp")
 def make_temperature_plot():
+    data = template_data2.get_temperature_data()
+    return render_template('plot.html', **data)
 
-    data = json.loads(data_base.get_temp_humidity())
-    df = pd.DataFrame(data)
-
-    fig = px.line(df, x="Time", y="Temp")
-    fig.show()
-    graphJSON = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
-    template_data = {"title": "Temperature",
-                     "header": "Temperature at home",
-                     "description": "Wow! Sure looks hot in here!",
-                     "graphJSON": graphJSON}
-
-    return render_template('plot.html', **template_data)
-
-@app.route("/base")
-def home():
-    return render_template("bootstap2.html")
+@app.route("/raspberry_pi")
+def raspberry_pi():
+    return render_template("raspberry_pi.html")
 
 if __name__ == "__main__":
    app.run(host='0.0.0.0', port=80, debug=True)
