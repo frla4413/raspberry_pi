@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}User Page{% endblock %}
+
+{% block body %}
+  {% with messages = get_flashed_messages() %}
+    {% if messages %}
+      {% for msg in messages %}
+        <p> {{ msg }} </p>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
+  <h1> Welcome {{ user }} </h1>
+  <form action ="#" method="POST">
+    <input type="email" name="email" placeholder="Enter Email" value="{{ email if email }}"/>
+    <input type="submit" value="submit"/>
+  </form>
+  <a class="btn btn-outline-primary" href="logout" role="button">Logout</a>
+{% endblock %}
