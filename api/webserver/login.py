@@ -1,22 +1,7 @@
-''' This program print Hello and output the current time
-To run:
-    o on pi: sudo python3 app.py
-    o on another computer/phon connected to the wifi: 192.168.0.13
-      (use a browser)
-    '''
-from flask import Flask, render_template, url_for,request, redirect, session, flash
-from datetime import timedelta
+from flask import Blueprint, render_template
 from flask_sqlalchemy import SQLAlchemy
-from sensor import sensor
-from sensors_webpage.sensors_webpage import sensors_webpage
 
-app = Flask(__name__)
-app.secret_key = "jagatergodisvarjedag"
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///users.sqlite3"
-app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
-app.permanent_session_lifetime = timedelta(minutes=5)
-
-app.register_blueprint(sensors_webpage,url_prefix="/sensors")
+login = Blueprint("login", __name__, static_folder="static")
 
 db = SQLAlchemy(app)
 
@@ -31,11 +16,6 @@ class Users(db.Model):
 
     def __str__(self):
         return f"{self.name}, {self.email}"
-
-@app.route("/")
-@app.route("/home")
-def home():
-    return render_template('home.html')
 
 @app.route("/login", methods=["POST", "GET"])
 def login():
@@ -87,11 +67,3 @@ def logout():
     session.pop("user",None)
     session.pop("email",None)
     return redirect(url_for("login"))
-
-@app.route("/view")
-def view():
-    return render_template("view.html", values=Users.query.all())
-
-if __name__ == "__main__":
-    db.create_all()
-    app.run(host='0.0.0.0', port=80, debug=True)

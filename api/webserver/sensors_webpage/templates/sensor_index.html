@@ -1,12 +1,14 @@
 {% extends "base.html" %}
 {% block title %}
-  Home Page
+  Sensors
 {% endblock %}
 
 {% block body %}
+<p> Measurments from Raspberry pi </p>
 <div class="d-grid gap-2 col-6 mx-auto">
   <a class="btn btn-outline-primary" href="sensors" role="button">Get Sensor Data</a>
   <a class="btn btn-outline-success" href="humidity" role="button">Humidity</a>
   <a class="btn btn-outline-danger" href="temp" role="button">Temperature</a>
+  <a class="btn btn-outline-danger" href="raspberry_pi" role="button">Raspberry Pi</a>
 </div>
 {% endblock %}
